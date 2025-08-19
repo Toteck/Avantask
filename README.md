@@ -80,7 +80,7 @@ Os commits devem seguir o padrão:
 
 - Instalação de dependências (React, TailwindCSS, etc.)
 
-## 2. Sanna Farias
+## 2. Fernanda Rosas
 
 - Design no Figma
 
@@ -88,29 +88,31 @@ Os commits devem seguir o padrão:
 
 - Definir cores, tipografia e espaçamentos seguindo boas práticas de UI/UX
 
-## 3. Sthephan
+- Design mobile-first
 
-Adicionar Tarefas (Requisito 01)
+- Layout adaptativo
 
-- Criar input controlado
+- Experiência consistente em todos dispositivos
 
-- Implementar validação de entrada
+## 3. Sthephan - 01 - Adicionar Tarefas 
 
-- Resetar input após adicionar
+- Input controlado para nova tarefa
 
-## 4. Maria
+- Botão ou Enter para submeter
+  
+- Validação: não permitir tarefas vazias  
 
-- Exibir Lista de Tarefas (Requisito 02)
+- Limpar input após adicionar
+
+## 4. Maria - Exibir Lista de Tarefas (Requisito 02)
 
 - Renderizar array de tarefas
 
-- Mostrar título e status
+- Indicar status (pendente/concluída)
 
-- Implementar mensagem para lista vazia
+- Lista vazia: mensagem amigável 
 
-# 5. Gabriel Ramalhao
-
-- Marcar como Concluída (Requisito 03)
+# 5. Gabriel Ramalhao - Marcar como Concluída (Requisito 03)
 
 - Implementar toggle (checkbox ou botão)
 
@@ -118,17 +120,21 @@ Adicionar Tarefas (Requisito 01)
 
 - Estilizar visualmente tarefa concluída
 
-# 6. Kailany Sophia
+# 6. Kailany Sophia - Remover Tarefas 04
 
-- Remover Tarefas + Contador de Tarefas (Requisitos 04 e 05)
+- Botão de delete para cada tarefa
 
-- Criar botão de delete (com confirmação opcional)
+- Confirmação antes de remover (opcional)
 
-- Implementar contador de total, pendentes e concluídas
+- Remover do estado/lista 
 
 🔧 Extra (pode ser colaborativo)
 
-Interface Responsiva (Requisito 06): Todos podem ajudar a testar e ajustar responsividade no final.
+# 7. Sanna - Contador de Tarefas
+
+- Mostrar total de tarefas
+- Mostrar quantas estão pendentes
+- Mostrar quantas estão concluídas 
 
 
 # React + TypeScript + Vite
