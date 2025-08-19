@@ -80,7 +80,7 @@ Os commits devem seguir o padrão:
 
 - Instalação de dependências (React, TailwindCSS, etc.)
 
-## 2. Sanna Farias
+## 2. Fernanda Rosas
 
 - Design no Figma
 
