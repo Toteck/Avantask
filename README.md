@@ -128,8 +128,9 @@ Adicionar Tarefas (Requisito 01)
 
 🔧 Extra (pode ser colaborativo)
 
-Interface Responsiva (Requisito 06): Todos podem ajudar a testar e ajustar responsividade no final.
+# 7. Sanna
 
+- Responsividade
 
 # React + TypeScript + Vite
 
