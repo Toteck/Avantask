@@ -1,0 +1,1 @@
+// services/: Ideal para colocar toda a lógica que lida com dados ou interações externas (no seu caso, o localStorage). Separar essa lógica do código do componente torna-o mais fácil de manter e testar.
