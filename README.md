@@ -130,6 +130,7 @@ Adicionar Tarefas (Requisito 01)
 
 # 7. Sanna
 
+- Criação da Interface
 - Responsividade
 
 # React + TypeScript + Vite
