@@ -8,6 +8,7 @@ import ModeNightIcon from '@mui/icons-material/ModeNight';
 
 type HeaderProps = {
   listTitle: string;
+  onTitleChange: (newTitle: string) => void;
   onClearList: () => void;
   isDarkMode: boolean;
   onToggleTheme: () => void;
