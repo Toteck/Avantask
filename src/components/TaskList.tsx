@@ -19,7 +19,12 @@ const TaskList: React.FC<TaskListProps> = ({
   onRemoveItem,
 }) => {
   if (tasks.length === 0) {
-    return null;
+    return (
+    <Typography variant="body1" color="text.secondary" sx={{ mt: 2 }}>
+      ✨ Nenhuma tarefa encontrada. Que tal adicionar uma nova?
+    </Typography>
+  );
+};
   }
 
   return (
