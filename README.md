@@ -94,7 +94,7 @@ Os commits devem seguir o padrão:
 
 - Experiência consistente em todos dispositivos
 
-## 3. Sthephan - 01 - Adicionar Tarefas 
+## 3. Stephan - 01 - Adicionar Tarefas 
 
 - Input controlado para nova tarefa
 
