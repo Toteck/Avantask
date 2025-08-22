@@ -4,6 +4,11 @@ import React, { useState } from 'react'; // adicionado useState
 import { TextField, InputAdornment, IconButton } from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
+export type Task = {
+  id: string;
+  title: string;
+  completed: boolean;
+};
 
 type AddItemInputProps = {
   onAddItem: (item: string) => void;
