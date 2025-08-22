@@ -21,12 +21,12 @@ const AddItemInput: React.FC<AddItemInputProps> = ({ onAddItem }) => {
     e.preventDefault();
     if (!title.trim()) return; // validação
 
-    onAddItem(value.trim()); // envia apenas a string
+    onAddItem(title.trim()); // envia apenas a string
     setTitle(""); // limpa o input após adicionar
     };
 
   return (
-    <form onSubmit={handleSubmit}> // adicionando o form para capturar o submit
+    <form onSubmit={handleSubmit}> 
     <TextField
     fullWidth
     placeholder="+ adicionar item da lista"
