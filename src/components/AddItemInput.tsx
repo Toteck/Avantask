@@ -1,6 +1,6 @@
 //componente pra adicionar item pra lista//
 
-import React, { useState } from 'react'; // adicionado useState
+import React, { useState } from 'react'; // adicionando useState
 import { TextField, InputAdornment, IconButton } from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
@@ -15,6 +15,19 @@ type AddItemInputProps = {
 };
 
 const AddItemInput: React.FC<AddItemInputProps> = ({ onAddItem }) => {
+  const [title, setTitle] = useState('');
+
+  const handleSubmit = (e: React.FormEvent) => { // adicionado handler
+    e.preventDefault();
+
+    if (!title.trim()) return; // validação
+
+    const newTask: Task = {   // cria objeto Tarefa
+      id: crypto.randomUUID(),
+      title: title.trim(),
+      completed: false,
+    };
+
   return (
     <form onSubmit={ (e) => { e.preventDefault(); onAddItem('teste');}}>
     <TextField
