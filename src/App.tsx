@@ -8,6 +8,8 @@ import { type Task } from "./components/tasks";
 import TaskList from "./components/TaskList";
 import AddItemInput from "./components/AddItemInput";
 import Header from "./components/Header";
+import TaskCounter from "./components/TaskCounter";
+
 
 // FUNÇÕES MOCKUP PRA PODER VER O FRONT
 
@@ -58,6 +60,7 @@ const App: React.FC = () => {
             isDarkMode={false} // Simule o tema
             onToggleTheme={mockOnToggleTheme}
           />
+          <TaskCounter tasks={mockTasks} />
           <AddItemInput onAddItem={mockOnAddItem} />
           <TaskList
             title="tarefas pendentes"
