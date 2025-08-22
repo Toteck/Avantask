@@ -26,7 +26,7 @@ const AddItemInput: React.FC<AddItemInputProps> = ({ onAddItem }) => {
     };
 
   return (
-    <form onSubmit={handleSubmit}> // adicionando o form para capturar o submit
+    <form onSubmit={handleSubmit}> {/*adicionando o form para capturar o submit*/}
     <TextField
     fullWidth
     placeholder="+ adicionar item da lista"
