@@ -21,7 +21,7 @@ const AddItemInput: React.FC<AddItemInputProps> = ({ onAddItem }) => {
     e.preventDefault();
     if (!title.trim()) return; // validação
 
-    onAddItem(value.trim()); // envia apenas a string
+    onAddItem(title.trim()); // envia apenas a string
     setTitle(""); // limpa o input após adicionar
     };
 
