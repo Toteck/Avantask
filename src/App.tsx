@@ -8,28 +8,40 @@ import { type Task } from "./components/tasks";
 import TaskList from "./components/TaskList";
 import AddItemInput from "./components/AddItemInput";
 import Header from "./components/Header";
+import { useLocalStorage } from "./hooks/useLocalStorage";
 
-// FUNÇÕES MOCKUP PRA PODER VER O FRONT
 
-const mockTasks: Task[] = [
-  { id: "1", text: "Criar os componentes visuais", completed: true },
-  { id: "2", text: "Integrar a funcionalidade", completed: false },
-  { id: "3", text: "Revisar o código", completed: false },
-  { id: "4", text: "Fazer o deploy", completed: false },
-];
+const App: React.FC = () => {
+  // Troca mockTasks pelo hook de Local Storage
+  const [tasks, setTasks] = useLocalStorage<Task[]>("tasks", [])
 
-const mockOnClearList = () =>
-  console.log('Função mock: "Limpar lista" chamada!');
-const mockOnAddItem = (text: string) =>
-  console.log('Função mock: "Adicionar item" chamada com o texto:', text);
-const mockOnToggleComplete = (id: string) =>
-  console.log('Função mock: "Alternar item" chamada para o ID:', id);
-const mockOnRemoveItem = (id: string) =>
-  console.log('Função mock: "Remover item" chamada para o ID:', id);
-const mockOnToggleTheme = () =>
-  console.log('Função mock: "Alternar tema" chamada!');
-const mockOnTitleChange = (newTitle: string) =>
-  console.log('Função mock: "Alterar título" chamada com:', newTitle);
+const handleAddItem = (title: string) => {
+  const newTask: Task = {
+    id: crypto.randomUUID(),
+    text: title,
+    completed: false,
+  };
+  setTasks([...tasks, newTask]); // atualiza estado + Local Storage
+};
+
+const handleToggleComplete = (id: string) => {
+  setTasks(
+    tasks.map((task) =>
+      task.id === id ? { ...task, completed: !task.completed } : task
+    )
+  );
+};
+
+const handleRemoveItem = (id: string) => {
+  setTasks(tasks.filter((task) => task.id !== id));
+};
+
+const handleClearList = () => setTasks([]);
+
+const handleTitleChange = (newTitle: string) =>
+  console.log('Alterar título chamado com:', newTitle);
+
+const handleToggleTheme = () => console.log('Alternar tema chamado!');
 
 const App: React.FC = () => {
   const pendingTasks = mockTasks.filter((task) => !task.completed);
