@@ -1,38 +1,9 @@
-export interface Task {
-  id: number;
-  title: string;
-  completed: boolean;
-  createdAt: string;
-}
+import { type Task } from '../components/tasks';
+
 export const mockTasks: Task[] = [
-  {
-    id: 1,
-    title: "Estudar React",
-    completed: false,
-    createdAt: new Date().toISOString()
-  },
-  {
-    id: 2,
-    title: "Fazer exercícios",
-    completed: true,
-    createdAt: new Date().toISOString()
-  },
-  {
-    id: 3,
-    title: "Ler um livro",
-    completed: false,
-    createdAt: new Date().toISOString()
-  },
-  {
-    id: 4,
-    title: "Organizar workspace",
-    completed: true,
-    createdAt: new Date().toISOString()
-  },
-  {
-    id: 5,
-    title: "Implementar contador",
-    completed: false,
-    createdAt: new Date().toISOString()
-  }
+  { id: "6", text: "Estudar React", completed: false },
+  { id: "7", text: "Fazer exercícios", completed: true },
+  { id: "8", text: "Ler um livro", completed: false },
+  { id: "9", text: "Organizar workspace", completed: true },
+  { id: "10", text: "Implementar contador", completed: false }
 ];
