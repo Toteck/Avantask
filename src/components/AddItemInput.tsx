@@ -11,7 +11,7 @@ export type Task = {
 };
 
 type AddItemInputProps = {
-  onAddItem: (titulo: string) => void;
+  onAddItem: (title: string) => void;
 };
 
 const AddItemInput: React.FC<AddItemInputProps> = ({ onAddItem }) => {
@@ -26,11 +26,13 @@ const AddItemInput: React.FC<AddItemInputProps> = ({ onAddItem }) => {
     };
 
   return (
-    <form onSubmit={ (e) => { e.preventDefault(); onAddItem('teste');}}>
+    <form onSubmit={handleSubmit}> // adicionando o form para capturar o submit
     <TextField
     fullWidth
     placeholder="+ adicionar item da lista"
     variant="standard"
+    value={title}
+    onChange={(e) => setTitle(e.target.value)} // atualiza o estado do input
     InputProps={{
       startAdornment: (
         <InputAdornment position="start">
