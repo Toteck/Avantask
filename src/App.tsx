@@ -15,6 +15,7 @@ const App: React.FC = () => {
   // Troca mockTasks pelo hook de Local Storage
   const [tasks, setTasks] = useLocalStorage<Task[]>("tasks", [])
 
+  //Funções para manipular tarefas
 const handleAddItem = (title: string) => {
   const newTask: Task = {
     id: crypto.randomUUID(),
@@ -43,9 +44,10 @@ const handleTitleChange = (newTitle: string) =>
 
 const handleToggleTheme = () => console.log('Alternar tema chamado!');
 
+//Filtros
 const App: React.FC = () => {
-  const pendingTasks = mockTasks.filter((task) => !task.completed);
-  const completedTasks = mockTasks.filter((task) => task.completed);
+  const pendingTasks = tasks.filter((task) => !task.completed);
+  const completedTasks = tasks.filter((task) => task.completed)
 
 
   const theme = useMemo(
@@ -70,18 +72,20 @@ const App: React.FC = () => {
             isDarkMode={false} // Simule o tema
             onToggleTheme={mockOnToggleTheme}
           />
-          <AddItemInput onAddItem={mockOnAddItem} />
+          <AddItemInput onAddItem={handleAddItem} /> // antes: onAddItem={mockOnAddItem}
+          //Ligação com componentes filhos
           <TaskList
             title="tarefas pendentes"
-            tasks={pendingTasks}
-            onToggleComplete={mockOnToggleComplete}
-            onRemoveItem={mockOnRemoveItem}
+            tasks={pendingTasks} 
+            onToggleComplete={handleToggleComplete} 
+            onRemoveItem={handleRemoveItem}
           />
+
           <TaskList
             title="itens concluídos"
-            tasks={completedTasks}
-            onToggleComplete={mockOnToggleComplete}
-            onRemoveItem={mockOnRemoveItem}
+            tasks={completedTasks} 
+            onToggleComplete={handleToggleComplete} 
+            onRemoveItem={handleRemoveItem} 
           />
         </Paper>
       </Box>
