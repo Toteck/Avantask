@@ -10,10 +10,10 @@ type AddItemInputProps = {
 
 const AddItemInput: React.FC<AddItemInputProps> = ({ onAddItem }) => {
   return (
-    <form onSubmit={ (e) => { e.preventDefault(); onAddItem('teste');}}>
+    <form className="add-item-form" onSubmit={ (e) => { e.preventDefault(); onAddItem('teste');}}>
     <TextField
     fullWidth
-    placeholder="+ adicionar item da lista"
+    placeholder=" adicionar item da lista"
     variant="standard"
     InputProps={{
       startAdornment: (

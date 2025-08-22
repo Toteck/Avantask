@@ -2,35 +2,25 @@
 import React from 'react';
 import { Box, Typography, IconButton} from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
-import WbSunnyIcon from '@mui/icons-material/WbSunny';
-import ModeNightIcon from '@mui/icons-material/ModeNight';
-
 
 type HeaderProps = {
   listTitle: string;
   onTitleChange: (newTitle: string) => void;
   onClearList: () => void;
-  isDarkMode: boolean;
-  onToggleTheme: () => void;
 };
 
 const Header: React.FC<HeaderProps> = ({
   listTitle,
   onClearList,
-  isDarkMode,
-  onToggleTheme,
 }) => {
   return (
-    <Box display="flex" alignItems="center" justifyContent="space-between" p={2}>
+    <Box className="header">
       <Typography variant="h6" component="h1">
         {listTitle}
       </Typography>
       <Box>
         <IconButton onClick={onClearList}>
           <DeleteIcon />
-        </IconButton>
-        <IconButton onClick={onToggleTheme}>
-          {isDarkMode ? <ModeNightIcon /> : <WbSunnyIcon />}
         </IconButton>
       </Box>
     </Box>

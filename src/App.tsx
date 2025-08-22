@@ -1,8 +1,6 @@
 // src/App.tsx
-import React, { useMemo } from "react";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
-import { Box, Paper } from "@mui/material";
+import React from "react";
+import { Box } from "@mui/material";
 import "./App.css"; 
 import { type Task } from "./components/tasks"; 
 import TaskList from "./components/TaskList";
@@ -26,8 +24,6 @@ const mockOnToggleComplete = (id: string) =>
   console.log('Função mock: "Alternar item" chamada para o ID:', id);
 const mockOnRemoveItem = (id: string) =>
   console.log('Função mock: "Remover item" chamada para o ID:', id);
-const mockOnToggleTheme = () =>
-  console.log('Função mock: "Alternar tema" chamada!');
 const mockOnTitleChange = (newTitle: string) =>
   console.log('Função mock: "Alterar título" chamada com:', newTitle);
 
@@ -35,28 +31,12 @@ const App: React.FC = () => {
   const pendingTasks = mockTasks.filter((task) => !task.completed);
   const completedTasks = mockTasks.filter((task) => task.completed);
 
-
-  const theme = useMemo(
-    () =>
-      createTheme({
-        palette: {
-          mode: "light",
-        },
-      }),
-    []
-  ); 
-
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Box sx={{ p: 2 }}>
-        <Paper sx={{ p: 2 }}>
+      <Box className="app-container">
           <Header
             listTitle="Minha Lista de Tarefas"
             onTitleChange={mockOnTitleChange}
             onClearList={mockOnClearList}
-            isDarkMode={false} // Simule o tema
-            onToggleTheme={mockOnToggleTheme}
           />
           <AddItemInput onAddItem={mockOnAddItem} />
           <TaskList
@@ -71,9 +51,7 @@ const App: React.FC = () => {
             onToggleComplete={mockOnToggleComplete}
             onRemoveItem={mockOnRemoveItem}
           />
-        </Paper>
       </Box>
-    </ThemeProvider>
   );
 };
 

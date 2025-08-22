@@ -23,8 +23,8 @@ const TaskList: React.FC<TaskListProps> = ({
   }
 
   return (
-    <List>
-      <Typography variant="h6" sx={{ mt: 4, mb: 2 }}>
+    <List className="task-list">
+      <Typography variant="h6">
         {title}
       </Typography>
       {tasks.map((task: Task) => (
