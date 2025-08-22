@@ -17,7 +17,7 @@ type AddItemInputProps = {
 const AddItemInput: React.FC<AddItemInputProps> = ({ onAddItem }) => {
   const [title, setTitle] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => { // adicionado handler
+   const handleSubmit = (e: React.FormEvent) => { // adicionado handler
     e.preventDefault();
 
     if (!title.trim()) return; // validação
@@ -27,25 +27,28 @@ const AddItemInput: React.FC<AddItemInputProps> = ({ onAddItem }) => {
       title: title.trim(),
       completed: false,
     };
+  }
 
-  return (
-    <form onSubmit={ (e) => { e.preventDefault(); onAddItem('teste');}}>
-    <TextField
-    fullWidth
-    placeholder="+ adicionar item da lista"
-    variant="standard"
-    InputProps={{
-      startAdornment: (
-        <InputAdornment position="start">
-          <IconButton type="submit">
-            <AddCircleOutlineIcon />
-          </IconButton>
-        </InputAdornment>
-      ),
-    }}
-  />
-</form>
-  );
-};
+ 
+    return (
+      <form onSubmit={(e) => { e.preventDefault(); onAddItem('teste'); }}>
+        <TextField
+          fullWidth
+          placeholder="+ adicionar item da lista"
+          variant="standard"
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <IconButton type="submit">
+                  <AddCircleOutlineIcon />
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
+        />
+      </form>
+    );
+  };
+
 
 export default AddItemInput;
