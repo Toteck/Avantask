@@ -1,8 +1,9 @@
 //componente pra adicionar item pra lista//
 
-import React from 'react';
+import React, { useState } from 'react'; // adicionado useState
 import { TextField, InputAdornment, IconButton } from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+
 
 type AddItemInputProps = {
   onAddItem: (item: string) => void;
