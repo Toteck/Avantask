@@ -11,7 +11,7 @@ export type Task = {
 };
 
 type AddItemInputProps = {
-  onAddItem: (item: string) => void;
+  onAddItem: (titulo: string) => void;
 };
 
 const AddItemInput: React.FC<AddItemInputProps> = ({ onAddItem }) => {
@@ -19,13 +19,10 @@ const AddItemInput: React.FC<AddItemInputProps> = ({ onAddItem }) => {
 
   const handleSubmit = (e: React.FormEvent) => { // adicionado handler
     e.preventDefault();
-
     if (!title.trim()) return; // validação
 
-    const newTask: Task = {   // cria objeto Tarefa
-      id: crypto.randomUUID(),
-      title: title.trim(),
-      completed: false,
+    onAddItem(value.trim()); // envia apenas a string
+    setTitle(""); // limpa o input após adicionar
     };
 
   return (
