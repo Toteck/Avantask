@@ -24,7 +24,7 @@ const TaskList: React.FC<TaskListProps> = ({
 
   return (
     <List className="task-list">
-      <Typography variant="h6">
+      <Typography variant="h6" >
         {title}
       </Typography>
       {tasks.map((task: Task) => (

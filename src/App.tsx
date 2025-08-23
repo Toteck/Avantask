@@ -32,26 +32,26 @@ const App: React.FC = () => {
   const completedTasks = mockTasks.filter((task) => task.completed);
 
   return (
-      <Box className="app-container">
-          <Header
-            listTitle="Minha Lista de Tarefas"
-            onTitleChange={mockOnTitleChange}
-            onClearList={mockOnClearList}
-          />
-          <AddItemInput onAddItem={mockOnAddItem} />
-          <TaskList
-            title="tarefas pendentes"
-            tasks={pendingTasks}
-            onToggleComplete={mockOnToggleComplete}
-            onRemoveItem={mockOnRemoveItem}
-          />
-          <TaskList
-            title="itens concluídos"
-            tasks={completedTasks}
-            onToggleComplete={mockOnToggleComplete}
-            onRemoveItem={mockOnRemoveItem}
-          />
-      </Box>
+    <Box className="app-container">
+      <Header
+        listTitle="Minha Lista de Tarefas"
+        onTitleChange={mockOnTitleChange}
+        onClearList={mockOnClearList}
+      />
+      <AddItemInput onAddItem={mockOnAddItem} />
+      <TaskList
+        title="tarefas pendentes"
+        tasks={pendingTasks}
+        onToggleComplete={mockOnToggleComplete}
+        onRemoveItem={mockOnRemoveItem}
+      />
+      <TaskList
+        title="itens concluídos"
+        tasks={completedTasks}
+        onToggleComplete={mockOnToggleComplete}
+        onRemoveItem={mockOnRemoveItem}
+      />
+    </Box>
   );
 };
 
