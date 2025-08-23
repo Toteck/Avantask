@@ -4,8 +4,15 @@ import React, { useState } from "react";
 import { TextField, InputAdornment, IconButton } from "@mui/material";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 
+// Estrutura de task
+export type Task = {
+  id: string;
+  title: string;
+  completed: boolean;
+};
+
 type AddItemInputProps = {
-  onAddItem: (item: string) => void;
+  onAddItem: (title: string) => void;
 };
 
 const AddItemInput: React.FC<AddItemInputProps> = ({ onAddItem }) => {
