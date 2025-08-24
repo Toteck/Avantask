@@ -3,22 +3,15 @@ import React, { useMemo } from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { Box, Paper } from "@mui/material";
-import "./App.css"; 
-import { type Task } from "./components/tasks"; 
+import "./App.css";
+import { type Task } from "./components/tasks";
 import TaskList from "./components/TaskList";
 import AddItemInput from "./components/AddItemInput";
 import Header from "./components/Header";
+// import TaskCounter from "./components/TaskCounter";
+import { useLocalStorage } from "./hooks/useLocalStorage";
 import TaskCounter from "./components/TaskCounter";
 
-
-// FUNÇÕES MOCKUP PRA PODER VER O FRONT
-
-const mockTasks: Task[] = [
-  { id: "1", text: "Criar os componentes visuais", completed: true },
-  { id: "2", text: "Integrar a funcionalidade", completed: false },
-  { id: "3", text: "Revisar o código", completed: false },
-  { id: "4", text: "Fazer o deploy", completed: false },
-];
 
 const mockOnClearList = () =>
   console.log('Função mock: "Limpar lista" chamada!');
@@ -34,8 +27,43 @@ const mockOnTitleChange = (newTitle: string) =>
   console.log('Função mock: "Alterar título" chamada com:', newTitle);
 
 const App: React.FC = () => {
-  const pendingTasks = mockTasks.filter((task) => !task.completed);
-  const completedTasks = mockTasks.filter((task) => task.completed);
+
+  // Troca mockTasks pelo hook de Local Storage
+  const [tasks, setTasks] = useLocalStorage<Task[]>("tasks", [])
+
+  //Funções para manipular tarefas
+  const handleAddItem = (title: string) => {
+    const newTask: Task = {
+      id: crypto.randomUUID(),
+      text: title,
+      completed: false,
+    };
+    console.log({ newTask })
+    setTasks([...tasks, newTask]); // atualiza estado + Local Storage
+  };
+
+  const handleToggleComplete = (id: string) => {
+    setTasks(
+      tasks.map((task) =>
+        task.id === id ? { ...task, completed: !task.completed } : task
+      )
+    );
+  };
+
+  const handleRemoveItem = (id: string) => {
+    setTasks(tasks.filter((task) => task.id !== id));
+  };
+
+  const handleClearList = () => setTasks([]);
+
+  const handleTitleChange = (newTitle: string) =>
+    console.log('Alterar título chamado com:', newTitle);
+
+  const handleToggleTheme = () => console.log('Alternar tema chamado!');
+
+  //Filtros
+  const pendingTasks = tasks.filter((task) => !task.completed);
+  const completedTasks = tasks.filter((task) => task.completed)
 
 
   const theme = useMemo(
@@ -46,7 +74,7 @@ const App: React.FC = () => {
         },
       }),
     []
-  ); 
+  );
 
   return (
     <ThemeProvider theme={theme}>
@@ -60,19 +88,19 @@ const App: React.FC = () => {
             isDarkMode={false} // Simule o tema
             onToggleTheme={mockOnToggleTheme}
           />
-          <TaskCounter tasks={mockTasks} />
-          <AddItemInput onAddItem={mockOnAddItem} />
+          <TaskCounter completedTasks={completedTasks} pendingTasks={pendingTasks} />
+          <AddItemInput onAddItem={handleAddItem} />
           <TaskList
             title="tarefas pendentes"
             tasks={pendingTasks}
-            onToggleComplete={mockOnToggleComplete}
-            onRemoveItem={mockOnRemoveItem}
+            onToggleComplete={handleToggleComplete}
+            onRemoveItem={handleRemoveItem}
           />
           <TaskList
             title="itens concluídos"
             tasks={completedTasks}
-            onToggleComplete={mockOnToggleComplete}
-            onRemoveItem={mockOnRemoveItem}
+            onToggleComplete={handleToggleComplete}
+            onRemoveItem={handleRemoveItem}
           />
         </Paper>
       </Box>
