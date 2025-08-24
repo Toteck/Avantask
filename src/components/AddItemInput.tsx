@@ -16,32 +16,28 @@ type AddItemInputProps = {
 };
 
 const AddItemInput: React.FC<AddItemInputProps> = ({ onAddItem }) => {
-  const [inputText, setInputText] = useState("");
+  const [title, setTitle] = useState("");
 
-  const handleAddItem = (event: React.FormEvent) => {
-    event.preventDefault();
-    if (inputText.trim()) {
-      onAddItem(inputText);
-      setInputText("");
-    }
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!title.trim()) return;
+
+    onAddItem(title.trim());
+    setTitle("");
   };
 
   return (
-    <form className="add-item-form" onSubmit={handleAddItem}>
+    <form onSubmit={handleSubmit}>
       <TextField
         fullWidth
         placeholder=" adicionar item da lista"
         variant="standard"
-        value={inputText}
-        onChange={(e) => setInputText(e.target.value)}
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
         InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <IconButton
-                type="submit"
-                aria-label="adicionar item"
-                disabled={!inputText.trim()}
-              >
+          startAdornment: (
+            <InputAdornment position="start">
+              <IconButton type="submit">
                 <AddCircleOutlineIcon />
               </IconButton>
             </InputAdornment>
