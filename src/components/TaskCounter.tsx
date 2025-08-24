@@ -1,81 +1,91 @@
-import React, { useMemo } from 'react';
-import { type Task } from './tasks'; // Usar o tipo existente do projeto
+import React, { useMemo } from "react";
+import { Paper, Typography, Grid, LinearProgress, Box } from "@mui/material";
+import { type Task } from "./tasks";
 
 interface TaskCounterProps {
-  tasks: Task[];
+  pendingTasks?: Task[];
+  completedTasks?: Task[];
 }
 
-const TaskCounter: React.FC<TaskCounterProps> = ({ tasks }) => {
-  // Usando useMemo para otimizar os cálculos
-  const taskStats = useMemo(() => {
-    const total = tasks.length;
-    const completed = tasks.filter(task => task.completed).length;
-    const pending = total - completed;
-    
-    return { total, completed, pending };
-  }, [tasks]);
+interface StatCardProps {
+  value: number;
+  label: string;
+  color: string;
+}
+
+const StatCard = ({ value, label, color }: StatCardProps) => (
+  <Paper
+    elevation={2}
+    sx={{
+      p: 2,
+      textAlign: "center",
+      borderRadius: 2,
+      bgcolor: `${color}.50`,
+    }}
+  >
+    <Typography variant="h5" fontWeight="bold" color={`${color}.600`}>
+      {value}
+    </Typography>
+    <Typography variant="body2" fontWeight="medium" color={`${color}.800`}>
+      {label}
+    </Typography>
+  </Paper>
+);
+
+const TaskCounter = ({ pendingTasks, completedTasks }: TaskCounterProps) => {
+  const { total, completed, pending, progress } = useMemo(() => {
+    const completedCount = completedTasks?.length ?? 0;
+    const pendingCount = pendingTasks?.length ?? 0;
+    const totalCount = completedCount + pendingCount;
+    const progressPercent =
+      totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0;
+
+    return {
+      total: totalCount,
+      completed: completedCount,
+      pending: pendingCount,
+      progress: progressPercent,
+    };
+  }, [pendingTasks, completedTasks]);
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-      <h2 className="text-xl font-semibold text-gray-800 mb-4">
+    <Paper
+      elevation={3}
+      sx={{ p: 4, mb: 4, borderRadius: 3, bgcolor: "white" }}
+    >
+      <Typography variant="h6" fontWeight="bold" mb={2} color="text.primary">
         📊 Contador de Tarefas
-      </h2>
-      
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {/* Total de tarefas */}
-        <div className="bg-blue-50 rounded-lg p-4 text-center">
-          <div className="text-2xl font-bold text-blue-600">
-            {taskStats.total}
-          </div>
-          <div className="text-sm text-blue-800 font-medium">
-            Total de Tarefas
-          </div>
-        </div>
+      </Typography>
 
-        {/* Tarefas pendentes */}
-        <div className="bg-orange-50 rounded-lg p-4 text-center">
-          <div className="text-2xl font-bold text-orange-600">
-            {taskStats.pending}
-          </div>
-          <div className="text-sm text-orange-800 font-medium">
-            Pendentes
-          </div>
-        </div>
+      <Grid container spacing={2}>
+        <Grid item xs={12} md={4}>
+          <StatCard value={total} label="Total de Tarefas" color="blue" />
+        </Grid>
+        <Grid item xs={12} md={4}>
+          <StatCard value={pending} label="Pendentes" color="orange" />
+        </Grid>
+        <Grid item xs={12} md={4}>
+          <StatCard value={completed} label="Concluídas" color="green" />
+        </Grid>
+      </Grid>
 
-        {/* Tarefas concluídas */}
-        <div className="bg-green-50 rounded-lg p-4 text-center">
-          <div className="text-2xl font-bold text-green-600">
-            {taskStats.completed}
-          </div>
-          <div className="text-sm text-green-800 font-medium">
-            Concluídas
-          </div>
-        </div>
-      </div>
-
-      {/* Barra de progresso */}
-      <div className="mt-4">
-        <div className="flex justify-between text-sm text-gray-600 mb-2">
-          <span>Progresso</span>
-          <span>
-            {taskStats.total > 0 
-              ? Math.round((taskStats.completed / taskStats.total) * 100)
-              : 0
-            }%
-          </span>
-        </div>
-        <div className="w-full bg-gray-200 rounded-full h-2">
-          <div 
-            className="bg-green-500 h-2 rounded-full transition-all duration-300"
-            style={{ 
-              width: taskStats.total > 0 
-                ? `${(taskStats.completed / taskStats.total) * 100}%` 
-                : '0%' 
-            }}
-          ></div>
-        </div>
-      </div>
-    </div>
+      <Box mt={3}>
+        <Box display="flex" justifyContent="space-between" mb={1}>
+          <Typography variant="body2" color="text.secondary">
+            Progresso
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {progress}%
+          </Typography>
+        </Box>
+        <LinearProgress
+          variant="determinate"
+          value={progress}
+          sx={{ height: 8, borderRadius: 5 }}
+          color="success"
+        />
+      </Box>
+    </Paper>
   );
 };
 
