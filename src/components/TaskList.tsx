@@ -1,4 +1,4 @@
-//componente que cria a lista de tarefas//
+// componente que cria a lista de tarefas //
 
 import React from "react";
 import { List, Typography } from "@mui/material";
@@ -18,22 +18,37 @@ const TaskList: React.FC<TaskListProps> = ({
   onToggleComplete,
   onRemoveItem,
 }) => {
+  // Se não houver tarefas, mostra uma mensagem amigável
   if (tasks.length === 0) {
-    return null;
+    return (
+      <Typography variant="body1" sx={{ mt: 2, fontStyle: "italic" }}>
+        Nenhuma tarefa encontrada. Bora trabalhar?✨
+      </Typography>
+    );
   }
 
+  // Caso haja tarefas, renderiza a lista
   return (
     <List className="task-list">
       <Typography variant="h6" >
         {title}
       </Typography>
+
       {tasks.map((task: Task) => (
-        <TaskItem
-          key={task.id}
-          task={task}
-          onToggleComplete={onToggleComplete}
-          onRemoveItem={onRemoveItem}
-        />
+        <div key={task.id}>
+          <TaskItem
+            task={task}
+            onToggleComplete={onToggleComplete}
+            onRemoveItem={onRemoveItem}
+          />
+          <Typography
+            variant="caption"
+            color={task.completed ? "green" : "red"}
+            sx={{ ml: 4 }}
+          >
+            {task.completed ? "✅ Concluída" : "⏳ Pendente"}
+          </Typography>
+        </div>
       ))}
     </List>
   );
