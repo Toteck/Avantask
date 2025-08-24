@@ -15,21 +15,24 @@ type AddItemInputProps = {
 };
 
 const AddItemInput: React.FC<AddItemInputProps> = ({ onAddItem }) => {
-  const [title, setTitle] = useState('');
+  const [title, setTitle] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!title.trim()) return;
+    if (!title.trim()) {
+      alert("O título não pode estar vazio.");
+      return;
+    }
 
     onAddItem(title.trim());
-    setTitle('');
+    setTitle("");
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <TextField
         fullWidth
-        placeholder="+ adicionar item da lista"
+        placeholder="Adicionar item da lista"
         variant="standard"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
