@@ -1,21 +1,18 @@
 // src/App.tsx
-import React, { useMemo } from "react";
-import { Box } from "@mui/material";
+import React from "react";
+
+import { Box, Paper } from "@mui/material";
 import "./App.css";
 import { type Task } from "./components/tasks";
 import TaskList from "./components/TaskList";
 import AddItemInput from "./components/AddItemInput";
 import Header from "./components/Header";
+// import TaskCounter from "./components/TaskCounter";
 import { useLocalStorage } from "./hooks/useLocalStorage";
+import TaskCounter from "./components/TaskCounter";
 
 const mockOnClearList = () =>
   console.log('Função mock: "Limpar lista" chamada!');
-const mockOnAddItem = (text: string) =>
-  console.log('Função mock: "Adicionar item" chamada com o texto:', text);
-const mockOnToggleComplete = (id: string) =>
-  console.log('Função mock: "Alternar item" chamada para o ID:', id);
-const mockOnRemoveItem = (id: string) =>
-  console.log('Função mock: "Remover item" chamada para o ID:', id);
 const mockOnTitleChange = (newTitle: string) =>
   console.log('Função mock: "Alterar título" chamada com:', newTitle);
 
@@ -30,7 +27,7 @@ const App: React.FC = () => {
       text: title,
       completed: false,
     };
-    console.log({ newTask });
+    console.log({ newTask })
     setTasks([...tasks, newTask]); // atualiza estado + Local Storage
   };
 
@@ -46,23 +43,28 @@ const App: React.FC = () => {
     setTasks(tasks.filter((task) => task.id !== id));
   };
 
+  // Precisam ser implementadas
   const handleClearList = () => setTasks([]);
 
-  const handleTitleChange = (newTitle: string) =>
-    console.log("Alterar título chamado com:", newTitle);
+  const handleTitleChange = (newTitle: string) => {
+    
+  }
 
 
   //Filtros
   const pendingTasks = tasks.filter((task) => !task.completed);
-  const completedTasks = tasks.filter((task) => task.completed);
+  const completedTasks = tasks.filter((task) => task.completed)
 
   return (
-          <Box className="app-container">
+    
+      <Box sx={{ p: 2 }}>
+        <Paper sx={{ p: 2 }}>
           <Header
             listTitle="Minha Lista de Tarefas"
             onTitleChange={mockOnTitleChange}
             onClearList={mockOnClearList}
           />
+          <TaskCounter completedTasks={completedTasks} pendingTasks={pendingTasks} />
           <AddItemInput onAddItem={handleAddItem} />
           <TaskList
             title="Tarefas pendentes"
@@ -70,7 +72,6 @@ const App: React.FC = () => {
             onToggleComplete={handleToggleComplete}
             onRemoveItem={handleRemoveItem}
           />
-
           <TaskList
             title="Itens concluídos"
             tasks={completedTasks}
@@ -78,6 +79,7 @@ const App: React.FC = () => {
             onRemoveItem={handleRemoveItem}
           />
       </Box>
+    
   );
 };
 

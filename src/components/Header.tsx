@@ -3,6 +3,8 @@ import React from 'react';
 import { Box, Typography, IconButton} from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
 
+
+
 type HeaderProps = {
   listTitle: string;
   onTitleChange: (newTitle: string) => void;
@@ -22,6 +24,7 @@ const Header: React.FC<HeaderProps> = ({
         <IconButton onClick={onClearList}>
           <DeleteIcon />
         </IconButton>
+        
       </Box>
     </Box>
   );
